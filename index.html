@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calam Salon & Barber — Entebbe</title>
+<meta name="description" content="Calam Salon & Barber, Entebbe. Premium haircuts, shaves, colour, facials, braiding & nails. Book on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --ink:#15110d;
+    --ink-2:#1d1710;
+    --ink-3:#251c13;
+    --oxblood:#7c2734;
+    --oxblood-light:#a8394a;
+    --brass:#c9a24b;
+    --brass-light:#e6ce93;
+    --parchment:#f2e9d8;
+    --cream-dim:#cbbca1;
+    --line:rgba(230,206,147,.18);
+    --radius:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Manrope',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.01em;margin:0}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.7rem;
+    color:var(--brass-light);
+  }
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  ::selection{background:var(--oxblood);color:var(--parchment)}
+
+  /* subtle grain overlay for warmth */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:9000;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:500;
+    padding:18px 0;
+    transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(21,17,13,.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    padding:12px 0;
+    border-color:var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand img{height:42px;width:42px;object-fit:cover;border-radius:50%;border:1.5px solid var(--brass)}
+  .brand-name{font-family:'Fraunces',serif;font-size:1.15rem;letter-spacing:.01em;color:var(--parchment)}
+  .brand-name em{font-style:italic;color:var(--brass-light)}
+  nav.links{display:flex;gap:34px;list-style:none;margin:0;padding:0}
+  nav.links a{
+    text-decoration:none;color:var(--cream-dim);font-size:.88rem;letter-spacing:.03em;
+    position:relative;padding-bottom:4px;transition:color .3s;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--brass);transition:width .35s var(--ease);
+  }
+  nav.links a:hover{color:var(--parchment)}
+  nav.links a:hover::after{width:100%}
+  .cta-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--oxblood);color:var(--parchment);
+    padding:10px 20px;border-radius:999px;text-decoration:none;
+    font-size:.82rem;letter-spacing:.03em;font-weight:600;
+    border:1px solid rgba(230,206,147,.25);
+    transition:background .3s,transform .3s,box-shadow .3s;
+  }
+  .cta-btn:hover{background:var(--oxblood-light);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(124,39,52,.6)}
+  .burger{display:none;background:none;border:0;color:var(--parchment);font-size:1.4rem;cursor:pointer}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:center;
+    padding:140px 0 100px;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(124,39,52,.35), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(201,162,75,.18), transparent 50%),
+      linear-gradient(180deg, rgba(21,17,13,.55), rgba(21,17,13,.88)),
+      url('images/1.jpg') center/cover no-repeat;
+    background-color:var(--ink);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end}
+  .hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+  .pole{width:22px;height:22px;border-radius:50%;overflow:hidden;flex:none;border:1px solid var(--brass)}
+  .pole-stripes{
+    width:200%;height:400%;
+    background:repeating-linear-gradient(45deg,var(--oxblood) 0 10px,var(--parchment) 10px 20px,var(--brass) 20px 30px);
+    animation:pole-spin 2.4s linear infinite;
+  }
+  @keyframes pole-spin{from{transform:translateY(0)}to{transform:translateY(-56.5px)}}
+  .hero h1{
+    font-size:clamp(2.6rem,6vw,4.6rem);
+    line-height:1.02;color:var(--parchment);
+    max-width:11ch;
+  }
+  .hero h1 .accent{font-style:italic;color:var(--brass-light)}
+  .hero p.lede{max-width:44ch;color:var(--cream-dim);font-size:1.05rem;margin-top:22px}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;text-decoration:none;
+    border:1px solid var(--line);color:var(--parchment);font-weight:600;font-size:.88rem;
+    background:rgba(255,255,255,.04);backdrop-filter:blur(6px);
+    transition:border-color .3s,background .3s,transform .3s;
+  }
+  .btn-ghost:hover{border-color:var(--brass);background:rgba(255,255,255,.08);transform:translateY(-2px)}
+
+  .hero-card{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border-radius:var(--radius);
+    padding:26px 26px 22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+  }
+  .hero-card .stat-row{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .hero-card .stat-row:last-child{border-bottom:0}
+  .hero-card .stat-num{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--brass-light)}
+  .hero-card .stat-label{font-size:.78rem;color:var(--cream-dim);max-width:16ch;text-align:right}
+
+  .scroll-cue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--cream-dim);
+    font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- section shell ---------- */
+  section{position:relative;padding:110px 0}
+  .section-head{max-width:640px;margin-bottom:56px}
+  .section-head .eyebrow{margin-bottom:14px;display:block}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--parchment)}
+  .section-head p{color:var(--cream-dim);margin-top:14px;font-size:1rem;max-width:52ch}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ---------- about / why us ---------- */
+  .about{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+  .about-photo{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5}
+  .about-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+  .about-photo:hover img{transform:scale(1.06)}
+  .about-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(21,17,13,.75));
+  }
+  .badge-float{
+    position:absolute;bottom:16px;left:16px;right:16px;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(14px);border-radius:14px;padding:14px 16px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .badge-float i{color:var(--brass-light);font-size:1.3rem}
+  .badge-float span{font-size:.82rem;color:var(--parchment)}
+  .feature-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:18px}
+  .feature-list li{display:flex;gap:16px;align-items:flex-start}
+  .feature-list .ico{
+    flex:none;width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(201,162,75,.12);border:1px solid rgba(201,162,75,.3);color:var(--brass-light);
+  }
+  .feature-list h3{font-family:'Manrope',sans-serif;font-weight:700;font-size:1rem;color:var(--parchment)}
+  .feature-list p{margin:4px 0 0;color:var(--cream-dim);font-size:.9rem}
+
+  /* ---------- services / menu ledger ---------- */
+  .menu-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+  .menu-tab{
+    font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:9px 16px;border-radius:999px;border:1px solid var(--line);color:var(--cream-dim);
+    background:transparent;cursor:pointer;transition:all .3s var(--ease);
+  }
+  .menu-tab.active,.menu-tab:hover{border-color:var(--brass);color:var(--parchment);background:rgba(201,162,75,.1)}
+  .menu-groups{display:grid;grid-template-columns:1fr 1fr;gap:50px 60px}
+  .menu-group h3{
+    font-size:1.05rem;color:var(--brass-light);
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+    text-transform:uppercase;letter-spacing:.08em;font-family:'Space Mono',monospace;font-weight:700;font-size:.78rem;
+  }
+  .menu-group h3 i{font-size:.9rem}
+  .menu-item{
+    display:flex;align-items:baseline;gap:8px;padding:13px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .menu-item .name{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--parchment);white-space:nowrap}
+  .menu-item .dots{flex:1;border-bottom:1px dotted rgba(230,206,147,.35);transform:translateY(-4px)}
+  .menu-item .meta{text-align:right}
+  .menu-item .price{font-family:'Space Mono',monospace;color:var(--brass-light);font-weight:700}
+  .menu-item .dur{display:block;font-size:.7rem;color:var(--cream-dim);margin-top:2px}
+  .menu-note{margin-top:30px;font-size:.82rem;color:var(--cream-dim);font-style:italic}
+
+  /* ---------- gallery ---------- */
+  .gallery-grid{
+    columns:4 220px;column-gap:14px;
+  }
+  .gallery-grid figure{
+    margin:0 0 14px;break-inside:avoid;border-radius:14px;overflow:hidden;
+    position:relative;border:1px solid var(--line);
+  }
+  .gallery-grid img{width:100%;display:block;transition:transform .6s var(--ease),filter .6s var(--ease);filter:grayscale(15%)}
+  .gallery-grid figure:hover img{transform:scale(1.08);filter:grayscale(0%)}
+  .gallery-grid figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:14px 12px 10px;
+    background:linear-gradient(0deg,rgba(21,17,13,.85),transparent);
+    font-size:.74rem;letter-spacing:.05em;color:var(--parchment);
+    opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;
+  }
+  .gallery-grid figure:hover figcaption{opacity:1;transform:translateY(0)}
+
+  /* ---------- testimonials ---------- */
+  .testimonials{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .t-card{
+    background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;
+    padding:26px;transition:transform .35s var(--ease),border-color .35s;
+  }
+  .t-card:hover{transform:translateY(-6px);border-color:var(--brass)}
+  .t-card .stars{color:var(--brass-light);font-size:.8rem;margin-bottom:14px;letter-spacing:2px}
+  .t-card p{color:var(--parchment);font-size:.94rem;font-style:italic;margin:0 0 16px}
+  .t-card .who{display:flex;align-items:center;gap:10px}
+  .t-card .avatar{
+    width:36px;height:36px;border-radius:50%;background:var(--oxblood);
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:.9rem;color:var(--parchment);
+  }
+  .t-card .who strong{display:block;font-size:.85rem}
+  .t-card .who span{display:block;font-size:.72rem;color:var(--cream-dim)}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .info-card{
+    background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px;
+  }
+  .info-row{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .info-row:last-child{border-bottom:0}
+  .info-row .ico{
+    flex:none;width:40px;height:40px;border-radius:10px;background:rgba(124,39,52,.25);
+    border:1px solid rgba(124,39,52,.5);display:flex;align-items:center;justify-content:center;color:var(--brass-light);
+  }
+  .info-row h4{margin:0 0 4px;font-size:.92rem;color:var(--parchment)}
+  .info-row p,.info-row a{margin:0;color:var(--cream-dim);font-size:.88rem;text-decoration:none}
+  .info-row a:hover{color:var(--brass-light)}
+  .hours-row{display:flex;justify-content:space-between;font-size:.86rem;color:var(--cream-dim);padding:6px 0}
+  .hours-row span:last-child{color:var(--parchment);font-family:'Space Mono',monospace;font-size:.8rem}
+  .social-row{display:flex;gap:12px;margin-top:22px}
+  .social-row a{
+    width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);color:var(--parchment);text-decoration:none;transition:all .3s var(--ease);
+  }
+  .social-row a:hover{border-color:var(--brass);color:var(--brass-light);transform:translateY(-3px)}
+  .map-wrap{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);height:100%;min-height:420px}
+  .map-wrap iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(60%) invert(92%) contrast(90%)}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0;border-top:1px solid var(--line);text-align:center}
+  footer p{color:var(--cream-dim);font-size:.8rem;margin:0}
+  footer .fbrand{font-family:'Fraunces',serif;color:var(--brass-light);font-style:italic}
+
+  /* ---------- floating buttons ---------- */
+  .wa{
+    position:fixed;right:22px;bottom:22px;z-index:400;
+    width:58px;height:58px;border-radius:50%;
+    background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;text-decoration:none;box-shadow:0 12px 28px -8px rgba(37,211,102,.6);
+    animation:pulse-wa 2.8s ease-in-out infinite;
+  }
+  @keyframes pulse-wa{0%,100%{box-shadow:0 12px 28px -8px rgba(37,211,102,.6)}50%{box-shadow:0 12px 28px -4px rgba(37,211,102,.9)}}
+  .totop{
+    position:fixed;right:22px;bottom:92px;z-index:400;
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(255,255,255,.08);border:1px solid var(--line);backdrop-filter:blur(8px);
+    color:var(--parchment);display:flex;align-items:center;justify-content:center;
+    text-decoration:none;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;
+  }
+  .totop.show{opacity:1;pointer-events:auto}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+  }
+
+  /* ---------- responsive ---------- */
+  @media(max-width:920px){
+    nav.links,.cta-btn{display:none}
+    .burger{display:block}
+    .hero-grid{grid-template-columns:1fr}
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    .menu-groups{grid-template-columns:1fr}
+    .t-grid{grid-template-columns:1fr}
+    .gallery-grid{columns:2 160px}
+  }
+  nav.links.mobile-open{
+    display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:74%;max-width:320px;
+    background:var(--ink-2);border-left:1px solid var(--line);padding:100px 30px 30px;gap:26px;z-index:600;
+    box-shadow:-20px 0 40px rgba(0,0,0,.4);
+  }
+  .close-mobile{position:fixed;top:22px;right:24px;z-index:601;background:none;border:0;color:var(--parchment);font-size:1.4rem;display:none;cursor:pointer}
+  .close-mobile.show{display:block}
+</style>
+</head>
+<body>
+
+<a href="#main" class="sr-only" style="position:absolute;left:-999px;top:0;background:var(--brass);color:var(--ink);padding:10px;z-index:9999" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+
+<header id="siteHeader">
+  <div class="wrap nav-row">
+    <a href="#" class="brand">
+      <img src="images/logo.jpg" alt="Calam Salon & Barber logo">
+      <span class="brand-name">Calam <em>Salon &amp; Barber</em></span>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="cta-btn" href="https://wa.me/256752345511" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Book Now</a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+<button class="close-mobile" id="closeMobile" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="pole"><span class="pole-stripes"></span></span>
+          Entebbe's grooming house since day one
+        </div>
+        <h1>Sharp cuts, <span class="accent">soft hands,</span> honest craft.</h1>
+        <p class="lede">Calam Salon &amp; Barber is a full-service grooming house for men, women and kids — precision haircuts, hot towel shaves, colour, facials, braiding and nails, all under one roof in Entebbe.</p>
+        <div class="hero-actions">
+          <a class="cta-btn" href="https://wa.me/256752345511" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Chat &amp; Book a Slot</a>
+          <a class="btn-ghost" href="#services"><i class="fa-solid fa-list"></i> View Services &amp; Prices</a>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <div class="stat-row"><span class="stat-num">10+</span><span class="stat-label">Services under one roof, for the whole family</span></div>
+        <div class="stat-row"><span class="stat-num">6</span><span class="stat-label">Days a week open, walk-ins welcome</span></div>
+        <div class="stat-row"><span class="stat-num">100%</span><span class="stat-label">Sterile tools &amp; fresh blades, every client</span></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><i class="fa-solid fa-angle-down"></i></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo reveal">
+        <img src="images/2.jpg" alt="Inside Calam Salon & Barber, Entebbe" loading="lazy">
+        <div class="badge-float"><i class="fa-solid fa-scissors"></i><span>Trusted by regulars across Entebbe for consistent, tidy work</span></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Why Calam</span>
+        <h2 style="margin-top:14px">A neighbourhood salon run like a craft shop</h2>
+        <p style="color:var(--cream-dim);margin-top:14px;max-width:52ch">We keep the chair count small on purpose — it means every haircut, shave, braid or facial gets full attention, not a rushed slot between the next two clients.</p>
+        <ul class="feature-list">
+          <li>
+            <div class="ico"><i class="fa-solid fa-user-check"></i></div>
+            <div><h3>Skilled, friendly barbers &amp; stylists</h3><p>Trained hands for fades, braids, colour correction and classic wet shaves alike.</p></div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-solid fa-broom"></i></div>
+            <div><h3>Clean tools, every single time</h3><p>Fresh blades and sanitised equipment between every client — no shortcuts.</p></div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-brands fa-whatsapp"></i></div>
+            <div><h3>Book in seconds on WhatsApp</h3><p>No apps, no forms — message us your preferred time and we'll confirm your slot.</p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Menu</span>
+        <h2>Services &amp; pricing</h2>
+        <p>A straightforward price list, barbershop style — every service booked the same way, over WhatsApp. Prices below are a guide; message us to confirm before your visit.</p>
+      </div>
+
+      <div class="menu-groups reveal">
+        <div class="menu-group">
+          <h3><i class="fa-solid fa-scissors"></i> Hair &amp; Barbering</h3>
+          <div class="menu-item"><span class="name">Classic Haircut</span><span class="dots"></span><span class="meta"><span class="price">15,000 UGX</span><span class="dur">30 min</span></span></div>
+          <div class="menu-item"><span class="name">Skin Fade / Design Cut</span><span class="dots"></span><span class="meta"><span class="price">20,000 UGX</span><span class="dur">40 min</span></span></div>
+          <div class="menu-item"><span class="name">Kids Haircut</span><span class="dots"></span><span class="meta"><span class="price">10,000 UGX</span><span class="dur">25 min</span></span></div>
+          <div class="menu-item"><span class="name">Hot Towel Shave</span><span class="dots"></span><span class="meta"><span class="price">12,000 UGX</span><span class="dur">25 min</span></span></div>
+          <div class="menu-item"><span class="name">Beard Trim &amp; Line-up</span><span class="dots"></span><span class="meta"><span class="price">8,000 UGX</span><span class="dur">15 min</span></span></div>
+        </div>
+        <div class="menu-group">
+          <h3><i class="fa-solid fa-droplet"></i> Colour &amp; Chemical</h3>
+          <div class="menu-item"><span class="name">Full Colour</span><span class="dots"></span><span class="meta"><span class="price">from 40,000 UGX</span><span class="dur">90 min</span></span></div>
+          <div class="menu-item"><span class="name">Highlights / Balayage</span><span class="dots"></span><span class="meta"><span class="price">from 60,000 UGX</span><span class="dur">2 hr</span></span></div>
+          <div class="menu-item"><span class="name">Relaxer &amp; Treatment</span><span class="dots"></span><span class="meta"><span class="price">35,000 UGX</span><span class="dur">60 min</span></span></div>
+        </div>
+        <div class="menu-group">
+          <h3><i class="fa-solid fa-spa"></i> Skin &amp; Facials</h3>
+          <div class="menu-item"><span class="name">Classic Facial</span><span class="dots"></span><span class="meta"><span class="price">25,000 UGX</span><span class="dur">40 min</span></span></div>
+          <div class="menu-item"><span class="name">Deep Cleanse Facial</span><span class="dots"></span><span class="meta"><span class="price">35,000 UGX</span><span class="dur">55 min</span></span></div>
+        </div>
+        <div class="menu-group">
+          <h3><i class="fa-solid fa-hand-sparkles"></i> Braiding &amp; Nails</h3>
+          <div class="menu-item"><span class="name">Cornrows</span><span class="dots"></span><span class="meta"><span class="price">from 20,000 UGX</span><span class="dur">1–2 hr</span></span></div>
+          <div class="menu-item"><span class="name">Box Braids</span><span class="dots"></span><span class="meta"><span class="price">from 60,000 UGX</span><span class="dur">3–5 hr</span></span></div>
+          <div class="menu-item"><span class="name">Manicure &amp; Pedicure</span><span class="dots"></span><span class="meta"><span class="price">30,000 UGX</span><span class="dur">50 min</span></span></div>
+        </div>
+      </div>
+      <p class="menu-note reveal">* Prices shown are placeholders — swap in your real price list. Long or complex hair may attract a small styling fee, confirmed with you before we start.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Recent Work</span>
+        <h2>From the chair</h2>
+        <p>A look at cuts, colour and braids finished in the salon this month.</p>
+      </div>
+      <div class="gallery-grid reveal">
+        <figure><img src="images/1.jpg" loading="lazy" alt="Fresh haircut at Calam Salon & Barber"><figcaption>Fresh fade</figcaption></figure>
+        <figure><img src="images/2.jpg" loading="lazy" alt="Salon interior"><figcaption>The salon floor</figcaption></figure>
+        <figure><img src="images/3.jpg" loading="lazy" alt="Beard trim finish"><figcaption>Line-up &amp; shave</figcaption></figure>
+        <figure><img src="images/4.jpg" loading="lazy" alt="Hair colour work"><figcaption>Colour work</figcaption></figure>
+        <figure><img src="images/5.jpg" loading="lazy" alt="Braiding style"><figcaption>Braid styling</figcaption></figure>
+        <figure><img src="images/6.jpg" loading="lazy" alt="Manicure finish"><figcaption>Nail finish</figcaption></figure>
+        <figure><img src="images/7.jpg" loading="lazy" alt="Client haircut result"><figcaption>Client result</figcaption></figure>
+        <figure><img src="images/8.jpg" loading="lazy" alt="Facial treatment"><figcaption>Facial care</figcaption></figure>
+        <figure><img src="images/9.jpg" loading="lazy" alt="Barber at work"><figcaption>At work</figcaption></figure>
+        <figure><img src="images/10.jpg" loading="lazy" alt="Finished style"><figcaption>Finished style</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Client Words</span>
+        <h2>What people say after they sit down</h2>
+        <p>Swap these for your real Google reviews once you've collected a few — social proof like this is what turns visitors into bookings.</p>
+      </div>
+      <div class="t-grid reveal">
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"Best fade I've had in Entebbe. The barber actually listened to what I wanted instead of rushing me."</p>
+          <div class="who"><div class="avatar">D</div><div><strong>David O.</strong><span>Regular client</span></div></div>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"Took my daughter for braids and they were so patient with her. Clean space, friendly team."</p>
+          <div class="who"><div class="avatar">N</div><div><strong>Nakato R.</strong><span>Braids &amp; nails</span></div></div>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"My go-to for a hot towel shave before travel. Always on time, always sharp."</p>
+          <div class="who"><div class="avatar">M</div><div><strong>Moses K.</strong><span>Regular client</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Visit Us</span>
+        <h2>Find &amp; book Calam Salon</h2>
+        <p>Walk in, call ahead, or message us on WhatsApp to lock in a time.</p>
+      </div>
+      <div class="contact-grid reveal">
+        <div>
+          <div class="info-card">
+            <div class="info-row">
+              <div class="ico"><i class="fa-solid fa-location-dot"></i></div>
+              <div><h4>Address</h4><p>Entebbe, Uganda</p></div>
+            </div>
+            <div class="info-row">
+              <div class="ico"><i class="fa-solid fa-phone"></i></div>
+              <div><h4>Phone</h4><a href="tel:+256752345511">0752 345 511</a></div>
+            </div>
+            <div class="info-row">
+              <div class="ico"><i class="fa-brands fa-whatsapp"></i></div>
+              <div><h4>WhatsApp</h4><a href="https://wa.me/256752345511" target="_blank" rel="noopener">0752 345 511 — chat now</a></div>
+            </div>
+            <div class="info-row">
+              <div class="ico"><i class="fa-solid fa-clock"></i></div>
+              <div style="flex:1">
+                <h4>Opening hours</h4>
+                <div class="hours-row"><span>Mon – Fri</span><span>9:00 – 20:00</span></div>
+                <div class="hours-row"><span>Saturday</span><span>9:00 – 20:00</span></div>
+                <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+              </div>
+            </div>
+            <div class="social-row">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://wa.me/256752345511" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+              <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://maps.google.com/maps?q=0.0512,32.4637&z=14&output=embed" loading="lazy" title="Calam Salon & Barber location map"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> <span class="fbrand">Calam Salon &amp; Barber</span> · Entebbe, Uganda · All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/256752345511" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<a class="totop" id="toTop" href="#top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 500);
+  });
+
+  // mobile nav
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  const closeBtn = document.getElementById('closeMobile');
+  function openNav(){ navLinks.classList.add('mobile-open'); closeBtn.classList.add('show'); }
+  function closeNav(){ navLinks.classList.remove('mobile-open'); closeBtn.classList.remove('show'); }
+  burger.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  navLinks.addEventListener('click', e => { if(e.target.tagName === 'A') closeNav(); });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
